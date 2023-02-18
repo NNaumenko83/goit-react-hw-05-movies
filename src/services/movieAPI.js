@@ -40,6 +40,13 @@ export const getMovieReviews = async id => {
   return response.data.results;
 };
 
+export const searchMovie = async query => {
+  const searchConfig = { params: { api_key: API_KEY, query: query } };
+  const response = await movieApi('/search/movie', searchConfig);
+  console.log(response);
+  return response;
+};
+
 // МАСИВ ЖАНРІВ ПОДУМАТИ ЯК ВИКОРИСТАТИ І КУДИ ВНЕСТИ ДАНІ
 // https://api.themoviedb.org/3/genre/movie/list?api_key=6251e629c61bceaf56a3d45f05637256
 

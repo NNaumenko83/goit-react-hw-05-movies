@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from 'services';
+import { Bars } from 'react-loader-spinner';
+import Error from 'components/Error';
 
 import CastItem from '../CastItem';
 
@@ -9,13 +11,15 @@ import CastItem from '../CastItem';
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
-  console.log(movieId);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchCast = async () => {
+      setIsLoading(true);
       try {
         const response = await getMovieCast(movieId);
-        console.log(response.cast);
+
         setCast(
           response.cast.map(({ profile_path, name, character, id }) => ({
             profile_path,
@@ -24,31 +28,44 @@ const Cast = () => {
             id,
           }))
         );
-      } catch (error) {}
+      } catch (error) {
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchCast();
   }, [movieId]);
 
   return (
-    cast.length > 0 && (
-      <ul>
-        {cast.map(({ profile_path, name, character, id }) => (
-          <CastItem
-            key={id}
-            profile_path={profile_path}
-            name={name}
-            character={character}
-          />
-        ))}
-      </ul>
-    )
+    <>
+      {isLoading && (
+        <Bars
+          height="40"
+          width="40"
+          color="#280232"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      )}
+      {cast.length > 0 && (
+        <ul>
+          {cast.map(({ profile_path, name, character, id }) => (
+            <CastItem
+              key={id}
+              profile_path={profile_path}
+              name={name}
+              character={character}
+            />
+          ))}
+        </ul>
+      )}
+      {errorMessage && <Error />}
+    </>
   );
 };
 
 export default Cast;
-
-// profile_path;
-// character;
-// name;
-// id

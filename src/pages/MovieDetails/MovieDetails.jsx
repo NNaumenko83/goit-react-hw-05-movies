@@ -1,13 +1,21 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { getMovieById } from 'services';
+import { Bars } from 'react-loader-spinner';
+import Error from 'components/Error';
 
 const MovieDetails = () => {
   const [movieInfo, setMovieInfo] = useState([]);
   const { movieId } = useParams();
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const backLinkHref = location.state?.from ?? '/goit-react-hw-05-movies';
 
   useEffect(() => {
     const fetchMovieById = async () => {
+      setIsLoading(true);
       try {
         const movieData = await getMovieById(movieId);
         const { genres, vote_average, overview, original_title, poster_path } =
@@ -20,7 +28,9 @@ const MovieDetails = () => {
           poster_path,
         });
       } catch (error) {
-        console.log(error.message);
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -30,14 +40,22 @@ const MovieDetails = () => {
   const { genres, vote_average, overview, original_title, poster_path } =
     movieInfo;
 
-  console.log(genres, vote_average, overview, original_title, poster_path);
-
-  console.log(!!movieInfo.original_title);
-
   return (
     <>
+      {isLoading && (
+        <Bars
+          height="40"
+          width="40"
+          color="#280232"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      )}
       {Object.keys(movieInfo).length > 0 && (
         <>
+          <Link to={backLinkHref}>Go back</Link>
           <div>
             <h2>{original_title}</h2>
             <img
@@ -54,6 +72,8 @@ const MovieDetails = () => {
             <Link to="cast">Cast</Link>
             <Link to="reviews">Reviews</Link>
           </div>
+          {errorMessage && <Error errorMessage={errorMessage} />}
+
           <Outlet />
         </>
       )}
