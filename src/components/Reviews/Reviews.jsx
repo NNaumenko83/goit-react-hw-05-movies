@@ -21,7 +21,7 @@ const Reviews = () => {
       } catch (error) {}
     };
     fetchRewiews();
-  }, []);
+  }, [movieId]);
 
   return reviews.length > 0 ? (
     reviews.map(({ author, content, id }) => (

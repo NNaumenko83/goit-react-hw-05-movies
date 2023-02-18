@@ -28,7 +28,8 @@ const Cast = () => {
     };
 
     fetchCast();
-  }, []);
+  }, [movieId]);
+
   return (
     cast.length > 0 && (
       <ul>
