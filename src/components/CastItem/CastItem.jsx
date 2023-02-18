@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './CastItem.module.css';
+// import styles from './CastItem.module.css';
 
 const CastItem = ({ profile_path, name, character }) => {
   return (

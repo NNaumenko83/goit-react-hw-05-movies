@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './TrendingList.module.css';
+// import styles from './TrendingList.module.css';
 import TrendingItem from 'components/TrendingItem/TrendingItem';
 
 const TrendingList = ({ movies }) => {

@@ -4,7 +4,7 @@ import { getMovieReviews } from 'services/movieAPI';
 
 import ReviewsItem from 'components/ReviewsItem';
 
-import styles from './Reviews.module.css';
+// import styles from './Reviews.module.css';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);

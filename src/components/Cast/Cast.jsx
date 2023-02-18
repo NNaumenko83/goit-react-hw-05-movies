@@ -4,7 +4,7 @@ import { getMovieCast } from 'services';
 
 import CastItem from '../CastItem';
 
-import styles from './Cast.module.css';
+// import styles from './Cast.module.css';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './TrendingItem.module.css';
+// import styles from './TrendingItem.module.css';
 
 const TrendingItem = ({ id, title }) => {
   return (
