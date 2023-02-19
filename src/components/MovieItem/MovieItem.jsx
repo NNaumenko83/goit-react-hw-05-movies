@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-// import styles from './TrendingItem.module.css';
 
 const MovieItem = ({ id, title, state }) => {
   return (
@@ -14,3 +13,9 @@ const MovieItem = ({ id, title, state }) => {
 };
 
 export default MovieItem;
+
+MovieItem.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  state: PropTypes.object,
+};

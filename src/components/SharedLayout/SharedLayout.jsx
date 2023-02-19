@@ -1,17 +1,20 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Bars } from 'react-loader-spinner';
+import CustomLink from 'components/CustomLink';
+
+import { Header, Nav, Container } from './SharedLayout.styled';
 
 const SharedLayout = () => {
   return (
-    <>
-      <header>
-        <nav>
-          <Link to="/goit-react-hw-05-movies">Home</Link>
-          <Link to="/goit-react-hw-05-movies/movies">Movies</Link>
-        </nav>
-      </header>
+    <Container>
+      <Header>
+        <Nav>
+          <CustomLink to="/goit-react-hw-05-movies">Home</CustomLink>
+          <CustomLink to="/goit-react-hw-05-movies/movies">Movies</CustomLink>
+        </Nav>
+      </Header>
       <Suspense
         fallback={
           <Bars
@@ -27,7 +30,7 @@ const SharedLayout = () => {
       >
         <Outlet />
       </Suspense>
-    </>
+    </Container>
   );
 };
 

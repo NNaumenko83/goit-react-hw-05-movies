@@ -1,14 +1,18 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-
-// import styles from './ReviewsItem.module.css';
 
 const ReviewsItem = ({ author, content }) => {
   return (
     <li>
-      <h1>Author: {author}</h1>
+      <h3>Author: {author}</h3>
       <p>{content}</p>
     </li>
   );
 };
 
 export default ReviewsItem;
+
+ReviewsItem.propTypes = {
+  author: PropTypes.string,
+  content: PropTypes.string,
+};

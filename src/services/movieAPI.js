@@ -15,14 +15,12 @@ export const fetchTrendingMovie = async () => {
 };
 
 export const getMovieById = async id => {
-  console.log(id);
   const response = await movieApi(`/movie/${id}`, config);
   return response.data;
 };
 
 // Функція отримання даних про акторський склад
 export const getMovieCast = async id => {
-  console.log(id);
   const response = await movieApi(`/movie/${id}/credits`, config);
   return response.data;
 };
@@ -34,16 +32,13 @@ export const getMovieCast = async id => {
 
 // Функція отримання даних Reviews
 export const getMovieReviews = async id => {
-  console.log('getMovieReviews:', id);
   const response = await movieApi(`/movie/${id}/reviews`, config);
-  console.log('getMovieReviews:', response.data.results);
   return response.data.results;
 };
 
 export const searchMovie = async query => {
   const searchConfig = { params: { api_key: API_KEY, query: query } };
   const response = await movieApi('/search/movie', searchConfig);
-  console.log(response);
   return response;
 };
 

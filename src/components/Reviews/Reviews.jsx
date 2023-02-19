@@ -6,8 +6,6 @@ import Error from 'components/Error';
 
 import ReviewsItem from 'components/ReviewsItem';
 
-// import styles from './Reviews.module.css';
-
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +48,7 @@ const Reviews = () => {
           ))}
         </ul>
       ) : (
-        <h1>We don't have any reviews for this movie</h1>
+        <h3>We don't have any reviews for this movie</h3>
       )}
       {errorMessage && <Error />}
     </>

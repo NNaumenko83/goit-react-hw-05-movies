@@ -1,12 +1,21 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-// import styles from './TrendingList.module.css';
 import MovieItem from 'components/MovieItem';
 
 const MovieList = ({ movies, state }) => {
-  return movies.map(({ id, title }) => (
-    <MovieItem key={id} id={id} title={title} state={state} />
-  ));
+  return (
+    <ul>
+      {movies.map(({ id, title }) => (
+        <MovieItem key={id} id={id} title={title} state={state} />
+      ))}
+    </ul>
+  );
 };
 
 export default MovieList;
+
+MovieList.propTypes = {
+  movies: PropTypes.array,
+  state: PropTypes.any,
+};

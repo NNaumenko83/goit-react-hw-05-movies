@@ -3,10 +3,9 @@ import { useParams } from 'react-router-dom';
 import { getMovieCast } from 'services';
 import { Bars } from 'react-loader-spinner';
 import Error from 'components/Error';
+import { CastList } from './Cast.styled';
 
 import CastItem from '../CastItem';
-
-// import styles from './Cast.module.css';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -52,7 +51,7 @@ const Cast = () => {
         />
       )}
       {cast.length > 0 && (
-        <ul>
+        <CastList>
           {cast.map(({ profile_path, name, character, id }) => (
             <CastItem
               key={id}
@@ -61,7 +60,7 @@ const Cast = () => {
               character={character}
             />
           ))}
-        </ul>
+        </CastList>
       )}
       {errorMessage && <Error />}
     </>
