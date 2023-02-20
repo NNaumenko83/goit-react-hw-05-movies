@@ -61,7 +61,7 @@ const MovieDetails = () => {
     };
 
     fetchMovieById();
-  }, []);
+  }, [movieId]);
 
   const { genres, vote_average, overview, original_title, poster_path } =
     movieInfo;
