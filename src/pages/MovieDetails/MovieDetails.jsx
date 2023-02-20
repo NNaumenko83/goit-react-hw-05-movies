@@ -5,6 +5,7 @@ import { Bars } from 'react-loader-spinner';
 import { MovieCard, MovieInfo } from './MovieDetails.styled';
 import styled from '@emotion/styled';
 import { HiArrowSmLeft } from 'react-icons/hi';
+import { Suspense } from 'react';
 
 import Error from 'components/Error';
 
@@ -33,10 +34,12 @@ const MovieDetails = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const backLinkHref = location.state?.from ?? '/goit-react-hw-05-movies';
+  const [backLinkHref, setBackLinkHref] = useState(null);
 
   useEffect(() => {
+    const state = location.state?.from ?? '/goit-react-hw-05-movies';
+    setBackLinkHref(state);
+
     const fetchMovieById = async () => {
       setIsLoading(true);
       try {
@@ -58,7 +61,7 @@ const MovieDetails = () => {
     };
 
     fetchMovieById();
-  }, [movieId]);
+  }, []);
 
   const { genres, vote_average, overview, original_title, poster_path } =
     movieInfo;
@@ -108,7 +111,6 @@ const MovieDetails = () => {
             <p>Additional information</p>
             <ul>
               <li>
-                {' '}
                 <Link to="cast">Cast</Link>
               </li>
               <li>
@@ -117,8 +119,21 @@ const MovieDetails = () => {
             </ul>
           </div>
           {errorMessage && <Error errorMessage={errorMessage} />}
-
-          <Outlet />
+          <Suspense
+            fallback={
+              <Bars
+                height="40"
+                width="40"
+                color="#280232"
+                ariaLabel="bars-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+            }
+          >
+            <Outlet />
+          </Suspense>
         </>
       )}
     </>
