@@ -39,7 +39,9 @@ const MovieDetails = () => {
   useEffect(() => {
     const state = location.state?.from ?? '/goit-react-hw-05-movies';
     setBackLinkHref(state);
+  }, []);
 
+  useEffect(() => {
     const fetchMovieById = async () => {
       setIsLoading(true);
       try {
